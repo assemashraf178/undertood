@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1027552303688",
+    "project_id": "deafdumb-eeff6",
+    "storage_bucket": "deafdumb-eeff6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027552303688:android:9332084aa4b8675270567d",
+        "android_client_info": {
+          "package_name": "com.example.deaf_mute_clinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027552303688-4bfdgca0eo38h7dtvpgtu38b9lg80qpd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.deaf_mute_clinic",
+            "certificate_hash": "02a05e34777a0b4277761769915cd3babaf57a09"
+          }
+        },
+        {
+          "client_id": "1027552303688-4ram3vl9712tcie93d85ao0qkckv6s9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQuG8I2ZCKSYSf6B1yGG9oRXv7MuzdGqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027552303688-4ram3vl9712tcie93d85ao0qkckv6s9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
