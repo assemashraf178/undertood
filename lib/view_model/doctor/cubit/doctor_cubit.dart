@@ -50,6 +50,7 @@ class DoctorCubit extends Cubit<DoctorState> {
 
   List<PatientUserModel> patients = [];
   void getAllPatients() {
+    patients = [];
     emit(GetAllPatientDataLoadingState());
     FirebaseFirestore.instance.collection('Patient').get().then(
       (value) {
