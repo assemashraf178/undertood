@@ -36,7 +36,11 @@ class _LogInScreenForDoctorState extends State<LogInScreenForDoctor> {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state is DoctorLoginSuccessState) {
-          Navigator.pushNamed(context, RoutsNames.doctorHome);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutsNames.doctorHome,
+            (route) => false,
+          );
         }
       },
       builder: (context, state) {

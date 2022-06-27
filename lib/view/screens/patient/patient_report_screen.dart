@@ -127,11 +127,6 @@ buildReportWidget(context, PatientRecordModel? patientRecordModel) {
                             PatientCubit.get(context).sugarRates[index];
                         return Column(
                           children: [
-                            if (index == 0)
-                              buildContanerItem(
-                                context,
-                                "Initial Rate :${patientRecordModel.sugarRate} ",
-                              ),
                             CustomText(
                               text: 'This rate create at ${rate.dateTime}',
                               fontSise: 16,
@@ -152,11 +147,7 @@ buildReportWidget(context, PatientRecordModel? patientRecordModel) {
                 ),
                 buildContanerItem(
                   context,
-                  "Patient Age :${patientRecordModel.aatientAge ?? ''} ",
-                ),
-                buildContanerItem(
-                  context,
-                  "DOB : ${patientRecordModel.dOb ?? ''}",
+                  "Patient Age :${patientRecordModel.patientAge ?? ''} ",
                 ),
                 buildContanerItem(context,
                     "Mobile Phone : ${patientRecordModel.mobilePhone ?? ''}"),
@@ -167,75 +158,11 @@ buildReportWidget(context, PatientRecordModel? patientRecordModel) {
                 buildContanerItem(
                   context,
                   //   report!.date,
-                  "life stage : ${patientRecordModel.lifestage ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Preferred Location : ${patientRecordModel.preferredLocation ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Referred by :${patientRecordModel.referredby ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Name Person Completing : ${patientRecordModel.namePersonCompleting ?? ''}",
+                  "life stage : ${patientRecordModel.lifeStage ?? ''}",
                 ),
                 buildContanerItem(
                   context,
                   "Address :${patientRecordModel.address ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Reason for appointment :${patientRecordModel.reasonforappointment ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Current seeing a Therapist  : ${patientRecordModel.currentSeeingTherapist ?? ''} ",
-                ),
-                buildContanerItem(
-                  context,
-                  "Who  :${patientRecordModel.currentSeeingTherapistWho ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "How long  :${patientRecordModel.currentSeeingTherapistHowLong ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Currently medications and dosage  :${patientRecordModel.currentlyMedicationsAndDosage ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Previous Psychiatric :${patientRecordModel.previousPsychiatric ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Explain :${patientRecordModel.previousPsychiatricExplain ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Eating Diorder  :${patientRecordModel.eatingDiorder ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "How long ago :${patientRecordModel.eatingDiorderHowLongAgo ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Suicidal leation  :${patientRecordModel.suicidalleation ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "How long ago :${patientRecordModel.suicidalleationHowLongAgo ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Thoughts of hurming others :${patientRecordModel.thoughtsOfHurmingOthers ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
-                  "Explain :${patientRecordModel.thoughtsOfHurmingOthersExplain ?? ''}",
                 ),
                 buildContanerItem(
                   context,
@@ -248,6 +175,14 @@ buildReportWidget(context, PatientRecordModel? patientRecordModel) {
                 buildContanerItem(
                   context,
                   "whyPhysical :${patientRecordModel.whyPhysical ?? ''}",
+                ),
+                buildContanerItem(
+                  context,
+                  "Go to Doctor :${patientRecordModel.goToDoctor ?? ''}",
+                ),
+                buildContanerItem(
+                  context,
+                  "Doctor Time :${patientRecordModel.timeOfDoctor ?? ''}",
                 ),
               ],
             ),

@@ -96,6 +96,7 @@ class PatientCubit extends Cubit<PatientState> {
         .collection('Patient')
         .doc(patientUId)
         .collection('sugar_rate')
+        .orderBy('dateTime', descending: false)
         .get()
         .then((value) {
       for (var element in value.docs) {

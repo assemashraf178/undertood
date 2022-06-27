@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../helper/routs/routs_name.dart';
 import '../../widget/custom_button.dart';
 
-// ignore: must_be_immutable
 class PatientHomePage extends StatelessWidget {
   PatientHomePage({Key? key}) : super(key: key);
   var sugarPrecentageController = TextEditingController();
@@ -207,11 +206,13 @@ class PatientHomePage extends StatelessWidget {
                                               onPressed: () async {
                                                 PatientCubit.get(context)
                                                     .patientAddSugarRate(
-                                                        sugar:
-                                                            sugarPrecentageController
-                                                                .text,
-                                                        dateTime: DateTime.now()
-                                                            .toString());
+                                                  sugar:
+                                                      sugarPrecentageController
+                                                          .text,
+                                                  dateTime: DateTime.now()
+                                                      .toString()
+                                                      .substring(0, 16),
+                                                );
                                                 sugarPrecentageController.text =
                                                     '';
                                                 Navigator.of(context).pop();
@@ -237,56 +238,6 @@ class PatientHomePage extends StatelessWidget {
                               const SizedBox(
                                 height: 25,
                               ),
-                              /*CustomButton(
-                          text: " Embeded System ",
-                          ontap: () {
-                            showDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 237, 237, 237),
-                                      title: const Center(
-                                          child: Text(
-                                        " Add Blood Pressure & Heart beats?",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 22),
-                                      )),
-                                      content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            CustomTextField(
-                                              keyBordType: TextInputType.number,
-                                              lableText: "Blood Pressure",
-                                              controller:
-                                                  bloodPressureController,
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            CustomTextField(
-                                              keyBordType: TextInputType.number,
-                                              lableText: "Heart beats",
-                                              controller: heartBeatsController,
-                                            ),
-                                          ]),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {},
-                                            child: const Text("OK")),
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text("Cancel"))
-                                      ],
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ));
-                                });
-                          },
-                        ),*/
                             ],
                           ),
                         ),

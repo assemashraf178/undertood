@@ -32,7 +32,11 @@ class LogInScreenForPatient extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state is PatientLoginSuccessState) {
-          Navigator.pushNamed(context, RoutsNames.patientHome);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutsNames.patientHome,
+            (route) => false,
+          );
         }
       },
       builder: (context, state) {

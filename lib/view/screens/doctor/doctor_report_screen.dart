@@ -151,7 +151,7 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
           ),
           buildContanerItem(
             context,
-            "Your obstraction  : ${patientRecordModel.obstruction}",
+            "Your obstruction  : ${patientRecordModel.obstruction}",
           ),
           SizedBox(
             height: 200,
@@ -182,11 +182,7 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
           ),
           buildContanerItem(
             context,
-            "Patient Age :${patientRecordModel.aatientAge} ",
-          ),
-          buildContanerItem(
-            context,
-            "DOB : ${patientRecordModel.dOb}",
+            "Patient Age :${patientRecordModel.patientAge} ",
           ),
           buildContanerItem(
               context, "Mobile Phone : ${patientRecordModel.mobilePhone}"
@@ -199,75 +195,11 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
           buildContanerItem(
             context,
             //   report!.date,
-            "life stage : ${patientRecordModel.lifestage}",
-          ),
-          buildContanerItem(
-            context,
-            "Preferred Location : ${patientRecordModel.preferredLocation}",
-          ),
-          buildContanerItem(
-            context,
-            "Referred by :${patientRecordModel.referredby}",
-          ),
-          buildContanerItem(
-            context,
-            "Name Person Completing : ${patientRecordModel.namePersonCompleting}",
+            "life stage : ${patientRecordModel.lifeStage}",
           ),
           buildContanerItem(
             context,
             "Address :${patientRecordModel.address}",
-          ),
-          buildContanerItem(
-            context,
-            "Reason for appointment :${patientRecordModel.reasonforappointment}",
-          ),
-          buildContanerItem(
-            context,
-            "Current seeing a Therapist  : ${patientRecordModel.currentSeeingTherapist} ",
-          ),
-          buildContanerItem(
-            context,
-            "Who  :${patientRecordModel.currentSeeingTherapistWho}",
-          ),
-          buildContanerItem(
-            context,
-            "How long  :${patientRecordModel.currentSeeingTherapistHowLong}",
-          ),
-          buildContanerItem(
-            context,
-            "Currently medications and dosage  :${patientRecordModel.currentlyMedicationsAndDosage}",
-          ),
-          buildContanerItem(
-            context,
-            "Previous Psychiatric :${patientRecordModel.previousPsychiatric}",
-          ),
-          buildContanerItem(
-            context,
-            "Explain :${patientRecordModel.previousPsychiatricExplain}",
-          ),
-          buildContanerItem(
-            context,
-            "Eating Diorder  :${patientRecordModel.eatingDiorder}",
-          ),
-          buildContanerItem(
-            context,
-            "How long ago :${patientRecordModel.eatingDiorderHowLongAgo}",
-          ),
-          buildContanerItem(
-            context,
-            "Suicidal leation  :${patientRecordModel.suicidalleation}",
-          ),
-          buildContanerItem(
-            context,
-            "How long ago :${patientRecordModel.suicidalleationHowLongAgo}",
-          ),
-          buildContanerItem(
-            context,
-            "Thoughts of hurming others :${patientRecordModel.thoughtsOfHurmingOthers}",
-          ),
-          buildContanerItem(
-            context,
-            "Explain :${patientRecordModel.thoughtsOfHurmingOthersExplain}",
           ),
           buildContanerItem(
             context,
@@ -280,6 +212,14 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
           buildContanerItem(
             context,
             "whyPhysical :${patientRecordModel.whyPhysical}",
+          ),
+          buildContanerItem(
+            context,
+            "Go to Doctor :${patientRecordModel.goToDoctor ?? ''}",
+          ),
+          buildContanerItem(
+            context,
+            "Doctor Time :${patientRecordModel.timeOfDoctor ?? ''}",
           ),
           Container(
             padding: const EdgeInsets.all(6),

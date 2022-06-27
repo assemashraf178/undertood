@@ -12,10 +12,8 @@ void patientSignOut(context) {
   ).then((value) {
     if (value) {
       patientUId = "";
-      Navigator.pushReplacementNamed(
-        context,
-        RoutsNames.start,
-      );
+      Navigator.pushNamedAndRemoveUntil(
+          context, RoutsNames.start, (route) => false);
     }
   });
 }
@@ -26,10 +24,8 @@ void doctorSignOut(context) {
   ).then((value) {
     if (value) {
       doctorUId = "";
-      Navigator.pushReplacementNamed(
-        context,
-        RoutsNames.start,
-      );
+      Navigator.pushNamedAndRemoveUntil(
+          context, RoutsNames.start, (route) => false);
     }
   });
 }

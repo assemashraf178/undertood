@@ -52,7 +52,11 @@ class DoctorCubit extends Cubit<DoctorState> {
   void getAllPatients() {
     patients = [];
     emit(GetAllPatientDataLoadingState());
-    FirebaseFirestore.instance.collection('Patient').get().then(
+    FirebaseFirestore.instance
+        .collection('Patient')
+        .orderBy('name', descending: false)
+        .get()
+        .then(
       (value) {
         for (var element in value.docs) {
           patients.add(PatientUserModel.fromMap(element.data()));
@@ -72,11 +76,11 @@ class DoctorCubit extends Cubit<DoctorState> {
   void getAllSugarRates({required String patientUid}) {
     sugarModel = [];
     emit(GetAllSugarRatesDataLoadingState());
-
     FirebaseFirestore.instance
         .collection('Patient')
         .doc(patientUid)
         .collection('sugar_rate')
+        .orderBy('dateTime', descending: false)
         .get()
         .then((value) {
       for (var element in value.docs) {

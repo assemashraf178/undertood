@@ -18,57 +18,62 @@ class AllPatientsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              backgroundColor: ColorsApp.appBarColor,
-              title: const CustomText(
-                text: "All Patients",
-                fontSise: 20,
-                fontWeight: FontWeight.bold,
-              ),
+          appBar: AppBar(
+            backgroundColor: ColorsApp.appBarColor,
+            title: const CustomText(
+              text: "All Patients",
+              fontSise: 20,
+              fontWeight: FontWeight.bold,
             ),
-            body: ListView.separated(
-                padding: const EdgeInsets.all(20.0),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DoctorReportScreen(
-                            uId: DoctorCubit.get(context)
-                                .patients[index]
-                                .uId
-                                .toString(),
+          ),
+          body: state is! GetAllPatientDataLoadingState
+              ? ListView.separated(
+                  padding: const EdgeInsets.all(20.0),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DoctorReportScreen(
+                              uId: DoctorCubit.get(context)
+                                  .patients[index]
+                                  .uId
+                                  .toString(),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          child: const Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 40.0,
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 40.0,
+                            ),
+                            radius: 30.0,
+                            backgroundColor: Colors.grey.shade400,
                           ),
-                          radius: 30.0,
-                          backgroundColor: Colors.grey.shade400,
-                        ),
-                        const SizedBox(
-                          width: 20.0,
-                        ),
-                        CustomText(
-                          text: DoctorCubit.get(context).patients[index].name,
-                          color: Colors.black,
-                          fontSise: 22.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: DoctorCubit.get(context).patients.length));
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          CustomText(
+                            text: DoctorCubit.get(context).patients[index].name,
+                            color: Colors.black,
+                            fontSise: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: DoctorCubit.get(context).patients.length)
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
+        );
       },
     );
   }

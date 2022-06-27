@@ -39,9 +39,10 @@ class _SignUpScreenForPatientState extends State<SignUpScreenForPatient> {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state is PatientSigUpSuccessState) {
-          Navigator.pushReplacementNamed(
+          Navigator.pushNamedAndRemoveUntil(
             context,
             RoutsNames.patientRecord,
+            (route) => false,
           );
         }
       },

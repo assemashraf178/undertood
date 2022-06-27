@@ -44,7 +44,11 @@ class _SignUpScreenForDoctorState extends State<SignUpScreenForDoctor> {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
         if (state is DoctorCollectionSuccessState) {
-          Navigator.pushReplacementNamed(context, RoutsNames.doctorHome);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutsNames.doctorHome,
+            (route) => false,
+          );
         }
       },
       builder: (context, state) {
