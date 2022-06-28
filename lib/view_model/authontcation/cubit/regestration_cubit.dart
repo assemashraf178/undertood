@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deaf_mute_clinic/helper/constant/constant.dart';
 import 'package:deaf_mute_clinic/model/doctor/doctor_user_model.dart';
-import 'package:deaf_mute_clinic/model/patient/patient_record_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -194,55 +193,6 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       emit(DoctorCollectionSuccessState());
     }).catchError((onError) {
       emit(DoctorCollectionErrorState(error: onError.toString()));
-    });
-  }
-
-  void patientAddRecord({
-    required String patientName,
-    required String email,
-    required String mobilePhone,
-    required String homePhone,
-    required String address,
-    required String obstruction,
-    required String date,
-    required String patientAge,
-    required String lifeStage,
-    required String challenge,
-    required String physical,
-    required String whyPhysical,
-    required String goToDoctor,
-    String? timeOfDoctor,
-  }) {
-    PatientRecordModel patientRecordModel = PatientRecordModel(
-      patientName: patientName,
-      date: date,
-      email: email,
-      patientAge: patientAge,
-      mobilePhone: mobilePhone,
-      homePhone: homePhone,
-      lifeStage: lifeStage,
-      uId: patientUId,
-      address: address,
-      challenge: challenge,
-      obstruction: obstruction,
-      physical: physical,
-      whyPhysical: whyPhysical,
-      goToDoctor: goToDoctor,
-      timeOfDoctor: timeOfDoctor ?? '',
-    );
-    emit(AddRecordLoadingState());
-    FirebaseFirestore.instance
-        .collection('Patient')
-        .doc(patientUId)
-        .collection('records')
-        .doc('record')
-        .set(
-          patientRecordModel.toMap,
-        )
-        .then((value) {
-      emit(AddRecordSuccessState());
-    }).catchError((onError) {
-      emit(AddRecordErrorState(onError: onError.toString()));
     });
   }
 }

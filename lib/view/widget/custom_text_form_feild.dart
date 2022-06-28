@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? lableText;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final Function? onTap;
   final Function? suffixOnTap;
   final Function? validation;
+  final List<TextInputFormatter>? textInputFormatters;
 
   final Function? onChanged;
   const CustomTextField(
@@ -32,6 +34,7 @@ class CustomTextField extends StatelessWidget {
       this.prefexIcon,
       this.width = double.infinity,
       this.sufixIcon,
+      this.textInputFormatters,
       this.readOnly = false})
       : super(key: key);
 
@@ -61,6 +64,7 @@ class CustomTextField extends StatelessWidget {
                 },
                 obscureText: isPassward!,
                 cursorColor: Colors.grey,
+                inputFormatters: textInputFormatters,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     labelText: lableText,

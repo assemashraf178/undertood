@@ -6,6 +6,7 @@ import 'package:deaf_mute_clinic/view/widget/custom_text.dart';
 import 'package:deaf_mute_clinic/view/widget/custom_text_form_feild.dart';
 import 'package:deaf_mute_clinic/view_model/patient/cubit/patient_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../helper/routs/routs_name.dart';
@@ -18,6 +19,7 @@ class PatientHomePage extends StatelessWidget {
   var heartBeatsController = TextEditingController();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
+  var sugarFormKey = GlobalKey<FormState>();
   String? userId;
 
   @override
@@ -186,49 +188,67 @@ class PatientHomePage extends StatelessWidget {
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 237, 237, 237),
-                                        title: const Center(
-                                            child: Text(
-                                          " What is the sugar level today?",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 22),
-                                        )),
-                                        content: CustomTextField(
-                                          keyBordType: TextInputType.number,
-                                          lableText: "Sugar Percentage",
-                                          controller: sugarPrecentageController,
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () async {
-                                                PatientCubit.get(context)
-                                                    .patientAddSugarRate(
-                                                  sugar:
-                                                      sugarPrecentageController
-                                                          .text,
-                                                  dateTime: DateTime.now()
-                                                      .toString()
-                                                      .substring(0, 16),
-                                                );
-                                                sugarPrecentageController.text =
-                                                    '';
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text("OK")),
-                                          TextButton(
-                                              onPressed: () {
-                                                sugarPrecentageController.text =
-                                                    '';
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text("Cancel"))
-                                        ],
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
+                                      return Form(
+                                        key: sugarFormKey,
+                                        child: AlertDialog(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 237, 237, 237),
+                                          title: const Center(
+                                              child: Text(
+                                            " What is the sugar level today?",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 22),
+                                          )),
+                                          content: CustomTextField(
+                                            keyBordType: TextInputType.number,
+                                            lableText: "Sugar Percentage",
+                                            controller:
+                                                sugarPrecentageController,
+                                            textInputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9]')),
+                                            ],
+                                            validation: (value) {
+                                              RegExp _regExp = RegExp(r'[0-9]');
+                                              if (!_regExp.hasMatch(value)) {
+                                                return "Please enter the sugar percentage";
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () async {
+                                                  if (sugarFormKey.currentState!
+                                                      .validate()) {
+                                                    PatientCubit.get(context)
+                                                        .patientAddSugarRate(
+                                                      sugar:
+                                                          sugarPrecentageController
+                                                              .text,
+                                                      dateTime: DateTime.now()
+                                                          .toString()
+                                                          .substring(0, 16),
+                                                    );
+                                                    sugarPrecentageController
+                                                        .text = '';
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                },
+                                                child: const Text("OK")),
+                                            TextButton(
+                                                onPressed: () {
+                                                  sugarPrecentageController
+                                                      .text = '';
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text("Cancel"))
+                                          ],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
                                         ),
                                       );
                                     },

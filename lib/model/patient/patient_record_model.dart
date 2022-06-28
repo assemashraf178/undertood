@@ -3,7 +3,6 @@ class PatientRecordModel {
   String? email;
   String? patientAge;
   String? mobilePhone;
-  String? homePhone;
   String? lifeStage;
   String? uId;
   String? address;
@@ -26,7 +25,6 @@ class PatientRecordModel {
     this.uId,
     this.address,
     this.mobilePhone,
-    this.homePhone,
     this.lifeStage,
     this.obstruction,
     this.goToDoctor,
@@ -44,7 +42,6 @@ class PatientRecordModel {
     address = map['address'];
     date = map['date'];
     mobilePhone = map['mobilePhone'];
-    homePhone = map['homePhone'];
     lifeStage = map['lifeStage'];
     obstruction = map['obstruction'];
     goToDoctor = map['goToDoctor'];
@@ -62,7 +59,6 @@ class PatientRecordModel {
         'date': date,
         'address': address,
         'mobilePhone': mobilePhone,
-        'homePhone': homePhone,
         'lifeStage': lifeStage,
         'obstruction': obstruction,
         'goToDoctor': goToDoctor,

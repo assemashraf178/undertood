@@ -6,16 +6,6 @@ abstract class RegistrationState {}
 //initial
 class RegistrationInitialState extends RegistrationState {}
 
-// add record
-class AddRecordLoadingState extends RegistrationState {}
-
-class AddRecordSuccessState extends RegistrationState {}
-
-class AddRecordErrorState extends RegistrationState {
-  final String? onError;
-  AddRecordErrorState({this.onError});
-}
-
 //patent states
 class PatientLoginLoadingState extends RegistrationState {}
 

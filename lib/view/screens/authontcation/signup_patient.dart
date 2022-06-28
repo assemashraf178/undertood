@@ -26,159 +26,164 @@ class _SignUpScreenForPatientState extends State<SignUpScreenForPatient> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegistrationCubit, RegistrationState>(
-      listener: (context, state) {
-        if (state is PatientSigUpErrorState) {
-          final snackBar = SnackBar(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            backgroundColor: Colors.red,
-            content: Text(state.error.toString()),
-          );
-
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        if (state is PatientSigUpSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            RoutsNames.patientRecord,
-            (route) => false,
-          );
-        }
+    return BlocProvider(
+      create: (BuildContext context) {
+        return RegistrationCubit();
       },
-      builder: (context, state) {
-        return Scaffold(
-          key: scaffoldKey,
-          body: Container(
-            margin: const EdgeInsets.all(25.0),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  const Padding(
-                      padding: EdgeInsets.only(top: 12, right: 10),
-                      child: CustomText(
-                        text: "Let's care about our health",
-                        color: Color(
-                          0xff292929,
-                        ),
-                        fontSise: 24,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          CustomTextField(
-                              controller: nameController,
+      child: BlocConsumer<RegistrationCubit, RegistrationState>(
+        listener: (context, state) {
+          if (state is PatientSigUpErrorState) {
+            final snackBar = SnackBar(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              backgroundColor: Colors.red,
+              content: Text(state.error.toString()),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          if (state is PatientSigUpSuccessState) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RoutsNames.patientRecord,
+              (route) => false,
+            );
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            key: scaffoldKey,
+            body: Container(
+              margin: const EdgeInsets.all(25.0),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    const Padding(
+                        padding: EdgeInsets.only(top: 12, right: 10),
+                        child: CustomText(
+                          text: "Let's care about our health",
+                          color: Color(
+                            0xff292929,
+                          ),
+                          fontSise: 24,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                                controller: nameController,
+                                lableText: "Name",
+                                prefexIcon: Icons.person),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              controller: emailController,
+                              lableText: "Email",
+                              prefexIcon: Icons.email_outlined,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              isPassward:
+                                  RegistrationCubit.get(context).isPassword,
+                              suffixOnTap: () {
+                                RegistrationCubit.get(context)
+                                    .changePasswordVisibility();
+                              },
+                              controller: passwordController,
+                              lableText: "Create password",
+                              prefexIcon: Icons.lock_outlined,
+                              sufixIcon: RegistrationCubit.get(context).suffix,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              keyBordType: TextInputType.phone,
+                              controller: phoneController,
+                              lableText: "Phone",
+                              prefexIcon: Icons.phone_android_outlined,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            const CustomText(
+                              color: Colors.black,
+                              text: 'Emergency Contact',
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              keyBordType: TextInputType.name,
+                              controller: emergencyContactName,
                               lableText: "Name",
-                              prefexIcon: Icons.person),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            controller: emailController,
-                            lableText: "Email",
-                            prefexIcon: Icons.email_outlined,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            isPassward:
-                                RegistrationCubit.get(context).isPassword,
-                            suffixOnTap: () {
-                              RegistrationCubit.get(context)
-                                  .changePasswordVisibility();
-                            },
-                            controller: passwordController,
-                            lableText: "Create password",
-                            prefexIcon: Icons.lock_outlined,
-                            sufixIcon: RegistrationCubit.get(context).suffix,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            keyBordType: TextInputType.phone,
-                            controller: phoneController,
-                            lableText: "Phone",
-                            prefexIcon: Icons.phone_android_outlined,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          const CustomText(
-                            color: Colors.black,
-                            text: 'Emergency Contact',
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            keyBordType: TextInputType.name,
-                            controller: emergencyContactName,
-                            lableText: "Name",
-                            prefexIcon: Icons.person,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            keyBordType: TextInputType.phone,
-                            controller: emergencyContactPhone,
-                            lableText: "Phone",
-                            prefexIcon: Icons.phone,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            keyBordType: TextInputType.text,
-                            controller: emergencyContactAddress,
-                            lableText: "Address",
-                            prefexIcon: Icons.home,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField(
-                            keyBordType: TextInputType.text,
-                            controller: emergencyContactTypeOfKinship,
-                            lableText: "Type Of Kinship",
-                            prefexIcon: Icons.person,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                        ],
+                              prefexIcon: Icons.person,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              keyBordType: TextInputType.phone,
+                              controller: emergencyContactPhone,
+                              lableText: "Phone",
+                              prefexIcon: Icons.phone,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              keyBordType: TextInputType.text,
+                              controller: emergencyContactAddress,
+                              lableText: "Address",
+                              prefexIcon: Icons.home,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextField(
+                              keyBordType: TextInputType.text,
+                              controller: emergencyContactTypeOfKinship,
+                              lableText: "Type Of Kinship",
+                              prefexIcon: Icons.person,
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 70.0,
-                  ),
-                  state is PatientSigUpLoadingState
-                      ? const CircularProgressIndicator()
-                      : CustomButton(
-                          text: "Sign Up",
-                          ontap: () {
-                            validationInput(context);
-                          },
-                          height: 50,
-                          width: 260,
-                        ),
-                ],
+                    const SizedBox(
+                      height: 70.0,
+                    ),
+                    state is PatientSigUpLoadingState
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            text: "Sign Up",
+                            ontap: () {
+                              validationInput(context);
+                            },
+                            height: 50,
+                            width: 260,
+                          ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -191,6 +196,14 @@ class _SignUpScreenForPatientState extends State<SignUpScreenForPatient> {
       Notifications.error('you must enter correct password');
     } else if (nameController.text.isEmpty) {
       Notifications.error('you must enter correct name');
+    } else if (emergencyContactName.text.isEmpty) {
+      Notifications.error('you must enter correct name');
+    } else if (emergencyContactAddress.text.isEmpty) {
+      Notifications.error('you must enter correct address');
+    } else if (emergencyContactPhone.text.isEmpty) {
+      Notifications.error('you must enter correct phone');
+    } else if (emergencyContactTypeOfKinship.text.isEmpty) {
+      Notifications.error('you must enter correct type of kinship');
     } else {
       RegistrationCubit.get(context).patientSignUp(
         email: emailController.text,

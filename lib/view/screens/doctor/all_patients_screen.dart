@@ -4,15 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../helper/theme/theme.dart';
-import '../../../view_model/patient/cubit/patient_cubit.dart';
 import '../../widget/custom_text.dart';
 
-class AllPatientsScreen extends StatelessWidget {
+class AllPatientsScreen extends StatefulWidget {
   const AllPatientsScreen({Key? key}) : super(key: key);
 
   @override
+  State<AllPatientsScreen> createState() => _AllPatientsScreenState();
+}
+
+class _AllPatientsScreenState extends State<AllPatientsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    DoctorCubit.get(context).getAllPatients();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PatientCubit, PatientState>(
+    return BlocConsumer<DoctorCubit, DoctorState>(
       listener: (context, state) {
         // TODO: implement listener
       },

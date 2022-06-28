@@ -108,4 +108,48 @@ class PatientCubit extends Cubit<PatientState> {
       emit(PatientGetAllSugarRatesErrorState());
     });
   }
+
+  void patientAddRecord({
+    required String address,
+    required String obstruction,
+    required String date,
+    required String patientAge,
+    required String lifeStage,
+    required String challenge,
+    required String physical,
+    required String whyPhysical,
+    required String goToDoctor,
+    String? timeOfDoctor,
+  }) {
+    PatientRecordModel patientRecordModel = PatientRecordModel(
+      patientName: patientUserModel!.name ?? '',
+      date: date,
+      email: patientUserModel!.email ?? '',
+      patientAge: patientAge,
+      mobilePhone: patientUserModel!.phone ?? '',
+      lifeStage: lifeStage,
+      uId: patientUId,
+      address: address,
+      challenge: challenge,
+      obstruction: obstruction,
+      physical: physical,
+      whyPhysical: whyPhysical,
+      goToDoctor: goToDoctor,
+      timeOfDoctor: timeOfDoctor ?? '',
+    );
+    emit(AddRecordLoadingState());
+    FirebaseFirestore.instance
+        .collection('Patient')
+        .doc(patientUId)
+        .collection('records')
+        .doc('record')
+        .set(
+          patientRecordModel.toMap,
+        )
+        .then((value) {
+      emit(AddRecordSuccessState());
+    }).catchError((onError) {
+      emit(AddRecordErrorState(onError: onError.toString()));
+    });
+  }
 }

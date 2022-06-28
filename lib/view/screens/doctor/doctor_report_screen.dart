@@ -3,6 +3,7 @@ import 'package:deaf_mute_clinic/helper/theme/theme.dart';
 import 'package:deaf_mute_clinic/view/widget/custom_text.dart';
 import 'package:deaf_mute_clinic/view/widget/custom_text_form_feild.dart';
 import 'package:deaf_mute_clinic/view_model/doctor/cubit/doctor_cubit.dart';
+import 'package:deaf_mute_clinic/view_model/patient/cubit/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +29,15 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
     super.initState();
     DoctorCubit.get(context).getAllRecords(patientUid: widget.uId);
     DoctorCubit.get(context).getAllSugarRates(patientUid: widget.uId);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    userModel = null;
+    PatientCubit.get(context).patientRecordModel = null;
+    PatientCubit.get(context).sugarRates = [];
+    super.dispose();
   }
 
   @override
@@ -59,53 +69,6 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Column(
                       children: [
-                        /*  const CustomText(
-                        text: 'Sugar Rate',
-                        color: Colors.black,
-                        fontSise: 18.0,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 239, 239, 239)
-                                .withOpacity(.9),
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 200,
-                        child: ListView.builder(
-                            itemCount:
-                                DoctorCubit.get(context).sugarModel.length,
-                            itemBuilder: (context, index) {
-                              SugarRate rate =
-                                  DoctorCubit.get(context).sugarModel[index];
-                              return Column(
-                                children: [
-                                  if (index == 0)
-                                    buildContanerItem(
-                                      context,
-                                      "Initial Rate :${DoctorCubit.get(context).patientRecordModel!.sugarRate} ",
-                                    ),
-                                  CustomText(
-                                    text:
-                                        'This rate create at ${rate.dateTime}',
-                                    fontSise: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.teal,
-                                  ),
-                                  buildContanerItem(
-                                    context,
-                                    " Rate  :${rate.sugar} ",
-                                  ),
-                                ],
-                              );
-                            }),
-                      ),
-                      const CustomText(
-                        text: 'Record',
-                        color: Colors.black,
-                        fontSise: 18.0,
-                      ),*/
                         buildListViewItem(
                             context,
                             DoctorCubit.get(context).patientRecordModel,
@@ -162,7 +125,7 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
                   children: [
                     CustomText(
                       text:
-                          'This rate create at ${DoctorCubit.get(context).sugarModel[index].dateTime}',
+                          'This rate create at ${DoctorCubit.get(context).sugarModel[index].dateTime!.substring(0, 16)}',
                       fontSise: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.teal,
@@ -188,10 +151,6 @@ Widget buildListViewItem(context, PatientRecordModel? patientRecordModel,
               context, "Mobile Phone : ${patientRecordModel.mobilePhone}"
               // report.pills ?? '',
               ),
-          buildContanerItem(
-            context,
-            "Home Phone :${patientRecordModel.homePhone}",
-          ),
           buildContanerItem(
             context,
             //   report!.date,

@@ -34,3 +34,13 @@ class PatientGetAllSugarRatesLoadingState extends PatientState {}
 class PatientGetAllSugarRatesSuccessState extends PatientState {}
 
 class PatientGetAllSugarRatesErrorState extends PatientState {}
+
+// add record
+class AddRecordLoadingState extends PatientState {}
+
+class AddRecordSuccessState extends PatientState {}
+
+class AddRecordErrorState extends PatientState {
+  final String? onError;
+  AddRecordErrorState({this.onError});
+}

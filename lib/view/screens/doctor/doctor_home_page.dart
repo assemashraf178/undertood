@@ -23,7 +23,6 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
     // TODO: implement initState
     super.initState();
     DoctorCubit.get(context).doctorGetData();
-    DoctorCubit.get(context).getAllPatients();
   }
 
   // @override

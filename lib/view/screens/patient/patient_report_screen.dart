@@ -153,10 +153,6 @@ buildReportWidget(context, PatientRecordModel? patientRecordModel) {
                     "Mobile Phone : ${patientRecordModel.mobilePhone ?? ''}"),
                 buildContanerItem(
                   context,
-                  "Home Phone :${patientRecordModel.homePhone ?? ''}",
-                ),
-                buildContanerItem(
-                  context,
                   //   report!.date,
                   "life stage : ${patientRecordModel.lifeStage ?? ''}",
                 ),
